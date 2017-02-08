@@ -1,0 +1,71 @@
+package com.example.admin.animationblink;
+
+import android.animation.Animator;
+import android.app.Activity;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.TextView;
+
+public class MainActivity extends Activity implements Animation.AnimationListener {
+
+    TextView txtMessage;
+    Button btnStart;
+
+    // Animation
+    Animation animBlink;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        // TODO Auto-generated method stub
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        txtMessage = (TextView) findViewById(R.id.txtmessage);
+        btnStart = (Button) findViewById(R.id.button);
+
+        // load the animation
+        animBlink = AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.blink);
+
+        // set animation listener
+        animBlink.setAnimationListener(this);
+
+        // button click event
+        btnStart.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                txtMessage.setVisibility(View.VISIBLE);
+
+                // start the animation
+                txtMessage.startAnimation(animBlink);
+            }
+        });
+
+    }
+
+    @Override
+    public void onAnimationEnd(Animation animation) {
+        // Take any action after completing the animation
+
+        // check for blink animation
+        if (animation == animBlink) {
+        }
+
+    }
+
+    @Override
+    public void onAnimationRepeat(Animation animation) {
+
+    }
+
+    @Override
+    public void onAnimationStart(Animation animation) {
+
+    }
+
+}
